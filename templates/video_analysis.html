@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Video Analysis</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background-color: #1F1717;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            margin: 20px auto;
+            width: 80%;
+            padding: 10px;
+            background-color: #1F1717;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .result {
+            text-align: left;
+            margin: 20px auto;
+            width: 80%;
+            padding: 10px;
+            background-color: #1F1717;
+            border-radius: 10px;
+        }
+        .input-text {
+            font-size: 24px;
+            color: #CD1818;
+            padding: 10px;
+            width: 60%;
+            margin: 10px;
+            border: 2px solid #CD1818;
+            border-radius: 5px;
+            background-color: #1F1717;
+            color: white;
+        }
+        .submit-button {
+            font-size: 20px;
+            color: white;
+            background-color: #CD1818;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+        .logo {
+            width: 100px;
+            height: auto;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        .massive-heading {
+            font-family: 'Poppins', sans-serif;
+            font-size: 36px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .subheading {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .analysis-result {
+            text-align: left;
+            margin-top: 20px;
+        }
+        .analysis-result h2 {
+            margin: 10px 0;
+        }
+        .analysis-result ul {
+            list-style: none;
+            padding: 0;
+        }
+        .analysis-result li {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #1F1717;
+            border-radius: 10px;
+        }
+        .analysis-result img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://static.vecteezy.com/system/resources/previews/018/930/572/non_2x/youtube-logo-youtube-icon-transparent-free-png.png" alt="YouTube Logo" class="logo">
+        <span class="massive-heading">Video Analysis</span>
+        <div class="result">
+            <h2>Video ID: {{ video_id }}</h2>
+            <h3>Sentiment Analysis</h3>
+            <ul>
+                {% for sentiment, comments in categorized_comments.items() %}
+                    <li>
+                        <h4>{{ sentiment }}</h4>
+                        <ul>
+                            {% for comment in comments %}
+                                <li>{{ comment }}</li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="word-cloud">
+            <h3>Word Cloud</h3>
+            <img src="data:image/png;base64, {{ word_cloud }}" alt="Word Cloud">
+        </div>
+        <a href="{{ video_link }}" class="video-link" target="_blank">Watch Video</a>
+    </div>
+</body>
+</html>
+

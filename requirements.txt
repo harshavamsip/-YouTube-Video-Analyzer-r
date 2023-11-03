@@ -1,0 +1,9 @@
+Flask
+google-api-python-client
+pandas
+matplotlib 
+textblob
+scikit-learn
+numpy
+tensorflow
+wordcloud

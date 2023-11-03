@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>YouTube Video Analyzer</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background-color: #1F1717;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            margin: 20px auto;
+            width: 80%;
+            padding: 10px;
+            background-color: #1F1717;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .result {
+            display: none;
+            text-align: left;
+            margin: 20px auto;
+            width: 80%;
+            padding: 10px;
+            background-color: #1F1717;
+            border-radius: 10px;
+        }
+        .input-text {
+            font-size: 24px;
+            color: #CD1818;
+            padding: 10px;
+            width: 60%;
+            margin: 10px;
+            border: 2px solid #CD1818;
+            border-radius: 5px;
+            background-color: #1F1717;
+            color: white;
+        }
+        .submit-button {
+            font-size: 20px;
+            color: white;
+            background-color: #CD1818;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+        .logo {
+            width: 100px;
+            height: auto;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        .massive-heading {
+            font-family: 'Poppins', sans-serif;
+            font-size: 36px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .subheading {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .video-list {
+            text-align: left;
+            margin-top: 20px;
+        }
+        .video-link {
+            font-size: 16px;
+            color: #00C7B0;
+            text-decoration: none;
+            display: block;
+            margin-top: 5px;
+        }
+        .analyze-button {
+            font-size: 20px;
+            color: white;
+            background-color: #CD1818;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://static.vecteezy.com/system/resources/previews/018/930/572/non_2x/youtube-logo-youtube-icon-transparent-free-png.png" alt="YouTube Logo" class="logo">
+        <span class="massive-heading">YouTube Video Analyzer</span>
+        <form method="POST" action="/">
+            <label for="search_query" class="subheading">Enter the topic of interest</label>
+            <input type="text" id="search_query" name="search_query" class="input-text" required>
+            <br>
+            <input type="submit" value="Search" class="submit-button">
+        </form>
+        <div class="video-list">
+            <h2>Search Results:</h2>
+            <ul>
+                {% if video_details %}
+                    {% for video in video_details %}
+                        <li>
+                            <h3>{{ video[0] }}</h3>
+                            <p>Published at: {{ video[4] }}</p>
+                            <p>Likes: {{ video[5] }}, Views: {{ video[6] }}</p>
+                            <a href="{{ video[1] }}" class="video-link" target="_blank">Watch Video</a>
+                            <form method="POST" action="/video_selection">
+                                <input type="hidden" name="video_id" value="{{ video[2] }}">
+                                <input type="submit" value="Analyze" class="analyze-button">
+                            </form>
+                        </li>
+                    {% endfor %}
+                {% else %}
+                    <p>No results found.</p>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
+
